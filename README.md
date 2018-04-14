@@ -14,4 +14,4 @@ At last, you can find the new folders in the downloaded train folder, which are 
 </br>
 2 Take a small Experiment
 ------
-  Run the `F1.py`, `EN1.py` and `NM1.py`. You can see that the results that are the `err` in the paper.
+Run the `F1.py`, `EN1.py` and `NM1.py`. You can see that the results that are the `err` in the paper.
