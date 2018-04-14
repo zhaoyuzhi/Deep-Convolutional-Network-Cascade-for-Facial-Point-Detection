@@ -2,7 +2,7 @@
 
 1 Data Preprocessing and Environmental Configuration
 ======
-1.1 Get Dataset
+## 1.1 Get Dataset
 First you could download the raw dataset provided by author [dataset web](http://mmlab.ie.cuhk.edu.hk/archive/CNN/). I save those pictures to desktop, which is easy for me to cite. And the URLs in my programs are relavant to desktop.
 </br>
 1.2 Build Environmental Configuration
