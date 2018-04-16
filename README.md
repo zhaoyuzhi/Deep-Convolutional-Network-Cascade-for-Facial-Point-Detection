@@ -32,9 +32,9 @@ The outputs are all percentages. You can change the hyper parameters and see whe
 
 ## 3 Training Method
 
-#### 3.1 Something
+#### 3.1 Something Important
 
-All the related programs are well trained by me. If you want to train again, the test_images is writen in the program.
+All the related programs are well trained by me. If you want to train again, the test_images is writen in the program. I set the iteration as 1000, for F1 network as an example, it means that each of the 10000 input images is used 1000 times. If you want to get a more precise result or you do not want to run the following networks, you can set a higher iteration.
 </br>
 #### 3.2 Level 1 Training Method
 
@@ -58,7 +58,7 @@ As for outputs, for single network like LE21, they are `the shifted x/y coordina
 
 ## 4 Testing Method
 
-#### 4.1 Something
+#### 4.1 Something Important
 
 All the related programs are tested by CASIA dataset. The raw pictures of CASIA dataset is normalized with 144*144 pixel.
 </br>
