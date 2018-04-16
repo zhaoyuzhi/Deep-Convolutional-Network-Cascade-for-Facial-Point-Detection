@@ -6,12 +6,18 @@
 
 First you could download the `raw dataset` provided by author [dataset web](https://mmlab.ie.cuhk.edu.hk/archive/CNN/). I save those pictures to desktop, which is easy for me to cite. And the URLs in my programs are relavant to `desktop`.
 </br>
-Then you need to bulid a new tensorflow-gpu environment with `python = 3.5`. And PIL, matplotlib, pandas, xlrd and xlwt libs should be installed. I used `Anaconda3` to finish these tasks so I recommend you use it to build relavant environment.
-You can reference [how to build a tensorflow-gpu environment 1](https://blog.csdn.net/lwplwf/article/details/54894364) and [how to build a tensorflow-gpu environment 2](https://blog.csdn.net/lwplwf/article/details/54896088).
+#### 1.2 Install Tensorflow-gpu
+
+First of all, you need to bulid a new tensorflow-gpu environment with `python = 3.5`. And then PIL, matplotlib, pandas, xlrd and xlwt libs should be installed. I used `Anaconda3` to finish these tasks so I recommend you use it to build relavant environment, which is very convenient.
+</br>
+If your gpu is NVIDIA product, you should also install `CUDA` and `cuDNN`, because they are the necessity of tensorflow. Before your installing, you need to examine the `computing capability` of your NVIDIA gpu [GPU computing capability](https://blog.csdn.net/real_myth/article/details/44308169). It is important that the specific version of tensorflow-gpu correspond to a certain version of CUDA or cuDNN. For example, my computer is `Win10 + CUDA9.0 + CUDNN7.1 + TensorFlow 1.6`.
+</br>
+You can reference [how to build a tensorflow-gpu environment 1](https://blog.csdn.net/lwplwf/article/details/54894364) and [how to build a tensorflow-gpu environment 2](https://blog.csdn.net/lwplwf/article/details/54896088). They are the detailed steps of installing tensorflow-gpu.
 </br>
 You should know that I take the experiment on my `Win10` computer with `NVIDIA GTX860m GPU`. So my programs are writen according to the configuration of my computer, and you could rename and change some of the variables, like URLs. And the versions of [CUDA](https://developer.nvidia.com/cuda-toolkit-archive) and [cuDNN](https://developer.nvidia.com/rdp/cudnn-download) should be related to your GPU, which is really important. Before you download the cuDNN, you should register a NVIDIA account. Besides, I strongly recommend that you prepare a computer with more than 8G RAM, because there are a lot of parameters.
 </br>
-#### 1.2 Get Level 1 Dataset
+#### 1.3 Get Level 1 Dataset
+
 Then you can run `read_pictures_for_level1.py` to get the training dataset. You should know that the dataset is divided into two parts: training dataset (10000 pictures after facebounding) and testing dataset (3466 pictures after facebounding), which are provided by paper author and you can find how to use them in the paper. When you train the network, use 10000 pictures for training and 3466 pictures for testing, because the 13466 pictures are all labeled with the x/y coordinates of five key points. And when you use your trained network for detection, I mean the parameters (learning rate, dropout, L2 regularization and so on) of trained network are defined, you could use the whole 13466 pictures to train the network and see the results of other input images.
 </br>
 At last, you can find the new folders in the downloaded train folder, which are the results: `lfw_5590_F1`, `lfw_5590_EN1`, `lfw_5590_NM1`, `lfw_5590_F1_test`, `lfw_5590_EN1_test`, `lfw_5590_NM1_test`, `net_7876_F1`, `net_7876_EN1`, `net_7876_NM1`, `net_7876_F1_test`, `net_7876_EM1_test`, `net_7876_NM1_test`. The reason of my building so many folders is that it is convenient for me to train the level 1 network. Indeed you may not write the program `read_pictures_for_level1.py` individually, just put the image preprocessing and network training together in one program.
