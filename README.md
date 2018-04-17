@@ -36,7 +36,7 @@ The number of iterations may be big and you can adjust it (in Session's for loop
 
 #### 3.1 Something Important
 
-All the related programs are well trained by me. If you want to train again, the test_images is writen in the program. I set the iteration as 1000, for F1 network as an example, it means that each of the 10000 input images is used 1000 times. If you want to get a more precise result or you do not want to run the following networks, you can set a higher iteration.
+All the related programs are well trained by me. If you want to train again, the test_images is writen in the program. I set the iteration as 1000, for F1 network as an example, it means that each of the 10000 input images is used 1000 times (batch size 16 / overall runing 625000 batches). If you want to get a more precise result or you do not want to run the following networks, you can set a higher iteration.
 </br>
 All the input images are all normalized as grey image and 39*39 pixel. The pixel values are all divided by 255.
 </br>
@@ -60,6 +60,8 @@ The dataset processing and network training works are put together in one progra
 </br>
 So the inputs of networks are randomly shifted pictures. The size of the regions are defined: *21 with ±0.16, *22 with ±0.18, *31 with ±0.12, *32 with ±0.11. For networks at level 2 and level 3, the four boundary positions are relative to the predicted
 facial point position by level 1. The maximum shift in both horizontal and vertical directions is 0.05 at the second level, and 0.02 at the third level, where the distances are normalized with the face bounding box.
+</br>
+For each image, I set 10 randomly shifted numbers so the overall number of images is 100000.
 </br>
 As for outputs, for single network like LE21, they are `the shifted x/y coordinates of key points (LE)`. The definition of the randomly shifted numbers are `rx` and `ry` in the programs. And I put the relative coordinates of level 2 bounding box as the outputs: (1-rx)/2 and (1-ry)/2.
 </br>
