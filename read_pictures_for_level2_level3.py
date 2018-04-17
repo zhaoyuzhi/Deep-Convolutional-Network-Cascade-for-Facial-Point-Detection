@@ -9,7 +9,7 @@ from PIL import Image
 import math
 import xlrd
 
-#read LFPW images according to excel file
+#YOU NEED NOT TO RUN THIS FILE, BECAUSE IT IS JUST A EXPERIMENT FOR YOU TO SEE THE LEVEL 2 & 3 INPUT
 IMAGEURL = "C:\\Users\\zhaoyuzhi\\Desktop\\train"
 
 IMAGESAVEURL_LE21_lfw = "C:\\Users\\zhaoyuzhi\\Desktop\\train\\lfw_5590_LE21"
