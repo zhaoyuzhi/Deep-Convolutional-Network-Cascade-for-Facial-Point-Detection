@@ -29,7 +29,7 @@ The `read_pictures_for_level2_level3.py` is a small test. You can run it to see 
 
 I prepare some programs for your test: `F1.py`, `EN1.py`, `NM1.py`, `LE21.py`, `LE31.py`. Please run some of them and you can see the results, which are the `err` definition in the paper. It is important that the PATH of the folders (see Section 1.2) are related to desktop, if your saving URLs are not desktop, you need to replace the variables in the programs.
 </br>
-The number of iterations may be big and you can adjust it (in Session's for loop). The outputs are all percentages. You can change the hyper parameters and see whether the result will be better. Every 500 iterations approximately costs 20-25 mins (GTX860m). But when the number of iterations reach 5000, it costs approximately 5 hours because the computer is really hot.
+The number of iterations may be big and you can adjust it (in Session's for loop). The outputs are all percentages. You can change the hyper parameters and see whether the result will be better. Every 500 iterations approximately costs 20-25 mins (GTX860m). But when the number of iterations reach 5000, it costs approximately 6 hours because the laptop is really hot.
 </br>
 
 ## 3 Training Method
@@ -41,6 +41,8 @@ All the related programs are well trained by me. If you want to train again, the
 All the input images are all normalized as grey image and 39*39 pixel. The pixel values are all divided by 255.
 </br>
 In order to enlarge the outputs, I multiply 39 and the relative coordinates of face bounding box, which is easy for me to evaluate the results.
+</br>
+The end condition of training is that the euclidean distance of the prediction position and the ground truth position is less than 5%. In the paper, the euclidean distance is called `err`.
 </br>
 #### 3.2 Level 1 Training Method
 
@@ -68,23 +70,27 @@ As for outputs, for single network like LE21, they are `the shifted x/y coordina
 
 All the related programs are tested by CASIA test dataset. The raw pictures of CASIA dataset is normalized as 144*144 pixel.
 </br>
+You can only run the `_run.py` to see the results, because the hyper parameters are all well trained in Section 3.
+</br>
 #### 4.2 Run Level 1
 
-Related programs are: `F1_run.py`, `EN1_run.py` and `NM1_run.py`.
+Related programs are: `F1_run.py`, `EN1_run.py` and `NM1_run.py`. First you should run these 3 '.py' files.
 </br>
 All the results are saved to excels: `F1.xlsx`, `EN1.xlsx` and `NM1.xlsx`. Then run `get_level1_keypoints.py`: put the outputs together (average) and get `level1.xlsx`.
 </br>
 #### 4.3 Run Level 2
 
-Related programs are: `LE21_run.py`, `LE22_run.py`, `RE21_run.py`, `RE22_run.py`, `N21_run.py`, `N22_run.py`, `LM21_run.py`, `LM22_run.py`, `RM21_run.py` and `RM22_run.py`.
+Related programs are: `LE21_run.py`, `LE22_run.py`, `RE21_run.py`, `RE22_run.py`, `N21_run.py`, `N22_run.py`, `LM21_run.py`, `LM22_run.py`, `RM21_run.py` and `RM22_run.py`. If you successfully get 'level1.xlsx', you can run these 10 '.py' files.
 </br>
 All the results are saved to excels: `LE21.xlsx`, `LE22.xlsx`, `RE21.xlsx`, `RE22.xlsx`, `N21.xlsx`, `N22.xlsx`, `LM21.xlsx`, `LM22.xlsx`, `RM21.xlsx` and `RM22.xlsx`. Then run `get_level2_keypoints.py`: put the outputs together (average) and get `level2.xlsx`.
 </br>
 #### 4.4 Run Level 3
 
-Related programs are: `LE31_run.py`, `LE32_run.py`, `RE31_run.py`, `RE32_run.py`, `N31_run.py`, `N32_run.py`, `LM31_run.py`, `LM32_run.py`, `RM31_run.py` and `RM32_run.py`.
+Related programs are: `LE31_run.py`, `LE32_run.py`, `RE31_run.py`, `RE32_run.py`, `N31_run.py`, `N32_run.py`, `LM31_run.py`, `LM32_run.py`, `RM31_run.py` and `RM32_run.py`. If you successfully get 'level2.xlsx', you can run these 10 '.py' files.
 </br>
 All the results are saved to excels: `LE31.xlsx`, `LE32.xlsx`, `RE31.xlsx`, `RE32.xlsx`, `N31.xlsx`, `N32.xlsx`, `LM31.xlsx`, `LM32.xlsx`, `RM31.xlsx` and `RM32.xlsx`. Then run `get_level3_keypoints.py`: put the outputs together (average) and get `level3.xlsx`.
+</br>
+The 'level3.xlsx' is the final result. Plot it, and see whether the result is great.
 </br>
 
 ## 5 Results and Reference
