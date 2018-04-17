@@ -4,7 +4,7 @@
 
 #### 1.1 Pre-Work of Environment
 
-First you could download the `raw dataset` provided by thesis author [dataset web](https://mmlab.ie.cuhk.edu.hk/archive/CNN/). I save those pictures to desktop, which is easy for me to cite. And the URLs in my programs are relavant to `desktop`.
+First you could download the `raw dataset` provided by paper author [dataset web](https://mmlab.ie.cuhk.edu.hk/archive/CNN/). I save those pictures to desktop, which is easy for me to cite. And the URLs in my programs are relavant to `desktop`.
 </br>
 #### 1.2 Install tensorflow-gpu
 
@@ -38,24 +38,28 @@ The number of iterations may be big and you can adjust it (in Session's for loop
 
 All the related programs are well trained by me. If you want to train again, the test_images is writen in the program. I set the iteration as 1000, for F1 network as an example, it means that each of the 10000 input images is used 1000 times. If you want to get a more precise result or you do not want to run the following networks, you can set a higher iteration.
 </br>
+All the input images are all normalized as grey image and 39*39 pixel. The pixel values are all divided by 255.
+</br>
+In order to enlarge the outputs, I multiply 39 and the relative coordinates of face bounding box, which is easy for me to evaluate the results.
+</br>
 #### 3.2 Level 1 Training Method
 
 Related programs are: `F1.py`, `EN1.py` and `NM1.py`.
 </br>
 In dataset preprocessing (see Section 1.2), the input pictures are well prepared: F1 pictures are -0.05 left, +1.05 right, -0.05 top and +1.05 bottom; EN1 pictures are -0.05 left, +1.05 right, -0.04 top and +0.84 bottom; F1 pictures are -0.05 left, +1.05 right, +0.18 top and +1.05 bottom. The four boundary positions are relative to the normalized face bounding box with boundary positions (0,1,0,1). And the pictures are all reshaped with (39,39), (31,39) and (31,39) according to the paper.
 </br>
-As for outputs, they can be found in `trainImageList.xlsx` and `testImageList.xlsx`, which are provided by paper author (please see the Section 1.1) [dataset web](https://mmlab.ie.cuhk.edu.hk/archive/CNN/). Of course the 10 outputs of each network are `the x/y coordinates of five key points (LE, RE, N, LM, RM)`.
+As for outputs, they can be found in `trainImageList.xlsx` and `testImageList.xlsx`, which are provided by paper author (please see the Section 1.1) [dataset web](https://mmlab.ie.cuhk.edu.hk/archive/CNN/). Of course the 10 or 6 outputs of each network are `the x/y coordinates of five key points (LE, RE, N, LM, RM)`.
 </br>
 #### 3.3 Level 2 & 3 Training Method
 
 Related programs are: `LE21.py`, `LE21.py`, `RE21.py`, `RE22.py`, `N21.py`, `N22.py`, `LM21.py`, `LM22.py`, `RM21.py`, `RM22.py`, `LE31.py`, `LE32.py`, `RE31.py`, `RE32.py`, `N31.py`, `N32.py`, `LM31.py`, `LM32.py`, `RM31.py` and `RM32.py`.
 </br>
-The dataset processing and network training works are put together in one program, because at the following two levels we should take training patches centered at positions randomly shifted from the ground truth position. So the two works writen in one program is easier for training, because the input region is random and we need not to save the randomly shifted pictures every training time.
+The dataset processing and network training works are put together in one program, because at the following two levels we should take training patches centered at positions `randomly shifted` from the ground truth position. So the two works writen in one program is easier for training, because the input region is random and we need not to save the randomly shifted pictures every training time.
 </br>
 So the inputs of networks are randomly shifted pictures. The size of the regions are defined: *21 with ±0.16, *22 with ±0.18, *31 with ±0.12, *32 with ±0.11. For networks at level 2 and level 3, the four boundary positions are relative to the predicted
 facial point position by level 1. The maximum shift in both horizontal and vertical directions is 0.05 at the second level, and 0.02 at the third level, where the distances are normalized with the face bounding box.
 </br>
-As for outputs, for single network like LE21, they are `the shifted x/y coordinates of key points (LE)`. The definition of the random numbers are `rx` and `ry` in the programs. And I put the relative coordinates of key points as the outputs: (1-rx)/2 and (1-ry)/2.
+As for outputs, for single network like LE21, they are `the shifted x/y coordinates of key points (LE)`. The definition of the randomly shifted numbers are `rx` and `ry` in the programs. And I put the relative coordinates of level 2 bounding box as the outputs: (1-rx)/2 and (1-ry)/2.
 </br>
 
 ## 4 Testing Method
@@ -72,12 +76,15 @@ All the results are saved to excels: `F1.xlsx`, `EN1.xlsx` and `NM1.xlsx`. Then 
 </br>
 #### 4.3 Run Level 2
 
-Related programs are: `LE21_run.py`, `LE21_run.py`, `RE21_run.py`, `RE22_run.py`, `N21_run.py`, `N22_run.py`, `LM21_run.py`, `LM22_run.py`, `RM21_run.py` and `RM22_run.py`.
+Related programs are: `LE21_run.py`, `LE22_run.py`, `RE21_run.py`, `RE22_run.py`, `N21_run.py`, `N22_run.py`, `LM21_run.py`, `LM22_run.py`, `RM21_run.py` and `RM22_run.py`.
 </br>
-All the results are saved to excels. Then run `get_level2_keypoints.py`: put the outputs together (average) and get `level2.xlsx`.
+All the results are saved to excels: `LE21.xlsx`, `LE22.xlsx`, `RE21.xlsx`, `RE22.xlsx`, `N21.xlsx`, `N22.xlsx`, `LM21.xlsx`, `LM22.xlsx`, `RM21.xlsx` and `RM22.xlsx`. Then run `get_level2_keypoints.py`: put the outputs together (average) and get `level2.xlsx`.
 </br>
 #### 4.4 Run Level 3
 
 Related programs are: `LE31_run.py`, `LE32_run.py`, `RE31_run.py`, `RE32_run.py`, `N31_run.py`, `N32_run.py`, `LM31_run.py`, `LM32_run.py`, `RM31_run.py` and `RM32_run.py`.
 </br>
-All the results are saved to excels. Then run `get_level2_keypoints.py`: put the outputs together (average) and get `level3.xlsx`.
+All the results are saved to excels: `LE31.xlsx`, `LE32.xlsx`, `RE31.xlsx`, `RE32.xlsx`, `N31.xlsx`, `N32.xlsx`, `LM31.xlsx`, `LM32.xlsx`, `RM31.xlsx` and `RM32.xlsx`. Then run `get_level3_keypoints.py`: put the outputs together (average) and get `level3.xlsx`.
+</br>
+
+## 5 Results and Reference
