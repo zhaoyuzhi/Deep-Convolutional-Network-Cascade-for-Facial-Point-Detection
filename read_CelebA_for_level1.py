@@ -9,7 +9,6 @@ Created on Thu Apr 19 09:37:38 2018
 #CelebA image lib has 202599 images with 5 key points label
 #I think CelebA could be regarded as training images and LFPW/BioID could be regarded as testing images
 from PIL import Image
-import math
 import xlrd
 
 #It is important that before you use this code, you should modify the image URLs
@@ -31,7 +30,7 @@ for i in range(204599):
     #input images (width = 178, height = 218)
     #min(LEx) = 56, min(LEy) = 98, max(REx) = 124, min(REy) = 95, min(LMx) = 57, max(LMy) = 174, max(REx) = 120, max(REy) = 173
     #the range of Nx is [57,121], the range of Ny is [93,156]
-    #Conclusion: min(left) = 56, min(top) = 95, max(right) = 121, max(bottom) = 174
+    #conclusion: min(left) = 56, min(top) = 95, max(right) = 121, max(bottom) = 174
     #I choose the coordinate of left_top corner as (44,90) and right_bottom corner as (133,179)
     #at first crop a square region for test, length is 89
     #that is faceboundingbox = [44,90,133,179]
@@ -55,3 +54,4 @@ for i in range(204599):
     region_NM1_resize = region_NM1.resize((39,31), Image.ANTIALIAS)   #EN1 image
     region_NM1_resize_grey = region_NM1_resize.convert('L')   #convert to grey image
     region_NM1_resize_grey.save(IMAGESAVEURL_NM1_CelebA + '\\' + imagename)
+    #it is important that you should remeber the parameter of faceboundingbox
