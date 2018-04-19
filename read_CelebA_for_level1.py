@@ -29,11 +29,14 @@ for i in range(204599):
     imagename = bbox_table.cell(i+1,0).value
     img = Image.open(IMAGEURL + '\\' + imagename,'r')
     #input images (width = 178, height = 218)
+    #min(LEx) = 56, min(LEy) = 98, max(REx) = 124, min(REy) = 95, min(LMx) = 57, max(LMy) = 174, max(REx) = 120, max(REy) = 173
+    #the range of Nx is [57,121], the range of Ny is [93,156]
+    #Conclusion: min(left) = 56, min(top) = 95, max(right) = 121, max(bottom) = 174
+    #I choose the coordinate of left_top corner as (44,90) and right_bottom corner as (133,179)
+    #at first crop a square region for test, length is 89
+    #that is faceboundingbox = [44,90,133,179]
     #output/crop face_bounding_box(left,top,right,bottom)
     #img.resize((width, height))
-    #at first crop a square region for test, length is 89
-    #I choose the coordinate of left_top corner as (44,90) and right_bottom corner as (133,179)
-    #that is faceboundingbox = [44,90,133,179]
     #for F1:
     faceboundingbox_F1 = [44,90,133,179]
     region = img.crop(faceboundingbox_F1)   #face bounding box image
