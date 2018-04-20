@@ -150,14 +150,14 @@ NM1_x_flat = tf.reshape(NM1_a_conv4, [-1,160])                      #outsize = b
 ## fully connected layer 1
 NM1_W_fc1 = nl.weight_variable([160,100])
 NM1_b_fc1 = nl.bias_variable([100])
-NM1_h_fc1 = nl.fc_layer(NM1_x_flat, NM1_W_fc1, NM1_b_fc1)           #outsize = batch*100
+NM1_h_fc1 = tf.matmul(NM1_x_flat, NM1_W_fc1) + NM1_b_fc1            #outsize = batch*100
 NM1_a_fc1 = tf.nn.relu(NM1_h_fc1)                                   #outsize = batch*100
 NM1_a_fc1_dropout = tf.nn.dropout(NM1_a_fc1, keep_prob)             #dropout layer 1
 
 ## fully connected layer 2
 NM1_W_fc2 = nl.weight_variable([100,6])
 NM1_b_fc2 = nl.bias_variable([6])
-NM1_h_fc2 = nl.fc_layer(NM1_a_fc1_dropout, NM1_W_fc2, NM1_b_fc2)    #outsize = batch*6
+NM1_h_fc2 = tf.matmul(NM1_a_fc1_dropout, NM1_W_fc2) + NM1_b_fc2     #outsize = batch*6
 NM1_a_fc2 = tf.nn.relu(NM1_h_fc2)                                   #outsize = batch*6
 
 #regularization and loss function
