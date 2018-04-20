@@ -40,7 +40,7 @@ for i in range(4151):                                               #train data 
     #extract image size and rawlandmarks data for normalized newlandmarks
     width = train_table.cell(i+1,4).value - train_table.cell(i+1,3).value
     height = train_table.cell(i+1,2).value - train_table.cell(i+1,1).value
-    rawlandmarks = train_table.row_slice(i+1, start_colx=5, end_colx=15)
+    rawlandmarks = train_table.row_slice(i+1, start_colx=5, end_colx=11)
     #get ten normalized newlandmarks(coordinates of LE,RE,N,LM,RM)
     for j in range(0,5,2):
         newlandmarks[j] = (rawlandmarks[j].value - train_table.cell(i+1,3).value) / width * 39
@@ -58,7 +58,7 @@ for i in range(5849):                                               #train data 
     #extract image size and rawlandmarks data for normalized newlandmarks
     width = train_table.cell(i+4152,4).value - train_table.cell(i+4152,3).value
     height = train_table.cell(i+4152,2).value - train_table.cell(i+4152,1).value
-    rawlandmarks = train_table.row_slice(i+4152, start_colx=5, end_colx=15)
+    rawlandmarks = train_table.row_slice(i+4152, start_colx=5, end_colx=11)
     #get ten normalized newlandmarks(coordinates of LE,RE,N,LM,RM)
     for j in range(0,5,2):
         newlandmarks[j] = (rawlandmarks[j].value - train_table.cell(i+4152,3).value) / width * 39
@@ -77,7 +77,7 @@ for i in range(1439):                                               #test data p
     #extract image size and rawlandmarks data for normalized newlandmarks
     width = test_table.cell(i+1,4).value - test_table.cell(i+1,3).value
     height = test_table.cell(i+1,2).value - test_table.cell(i+1,1).value
-    rawlandmarks = test_table.row_slice(i+1, start_colx=5, end_colx=15)
+    rawlandmarks = test_table.row_slice(i+1, start_colx=5, end_colx=11)
     #get ten normalized newlandmarks(coordinates of LE,RE,N,LM,RM)
     for j in range(0,5,2):
         newlandmarks[j] = (rawlandmarks[j].value - train_table.cell(i+1,3).value) / width * 39
@@ -95,7 +95,7 @@ for i in range(2027):                                               #test data p
     #extract image size and rawlandmarks data for normalized newlandmarks
     width = test_table.cell(i+1440,4).value - test_table.cell(i+1440,3).value
     height = test_table.cell(i+1440,2).value - test_table.cell(i+1440,1).value
-    rawlandmarks = test_table.row_slice(i+1440, start_colx=5, end_colx=15)
+    rawlandmarks = test_table.row_slice(i+1440, start_colx=5, end_colx=11)
     #get ten normalized newlandmarks(coordinates of LE,RE,N,LM,RM)
     for j in range(0,5,2):
         newlandmarks[j] = (rawlandmarks[j].value - train_table.cell(i+1440,3).value) / width * 39
