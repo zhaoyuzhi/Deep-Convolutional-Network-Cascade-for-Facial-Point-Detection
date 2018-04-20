@@ -1,6 +1,6 @@
 There are four dataset used in the project: LFPW, webface, CASIA_test and CelebA.
 If classifying those more precise, there are six dataset: LFW_train, LFW_test, webface_train, webface_test, CASIA_test and CelebA.
-It is worth saying that I do not use the testing dataset provided by the author because the bbox is wrong.
+It is worth saying that I do not use the testing dataset provided by the paper author because the bbox is wrong, so I introduce CASIA_test
 
 Training method 1:
 1.LFW_train and webface_train (overall 10000 images) are the training dataset;
