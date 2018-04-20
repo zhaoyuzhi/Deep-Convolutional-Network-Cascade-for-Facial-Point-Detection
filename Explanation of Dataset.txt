@@ -1,0 +1,48 @@
+There are four dataset used in the project: LFPW, webface, CASIA_test and CelebA.
+If classifying those more precise, there are six dataset: LFW_train, LFW_test, webface_train, webface_test, CASIA_test and CelebA.
+It is worth saying that I do not use the testing dataset provided by the author because the bbox is wrong.
+
+Training method 1:
+1.LFW_train and webface_train (overall 10000 images) are the training dataset;
+2.LFW_test and webface_test (overall 3466 images) are the validation dataset;
+3.For example in 'F1.py', 'EN1.py' and 'NM1.py', I take training method 1, and it is the same method as the paper.
+
+Training method 2:
+1.CelebA (overall 202599 images) are the training dataset;
+2.LFW_train, webface_train, LFW_test and webface_test (overall 13466 images) are the validation dataset;
+3.I do not upload this program in Github.
+
+Testing method:
+1.Apply the well trained networks.
+2.Take CASIA_test as the test dataset, and see the results. You can find the implementation in '*_run.py'
+
+
+
+If you want to download CASIA_test dataset, please see:   Download_URL: https://pan.baidu.com/s/1QUbzTPcUyluUn91IHzO9wQ   code: zhnr
+Attention! You should not apply this dataset to other applications!
+This dataset is processed by 'zhaoyuzhi' and it's only for 'Deep-Convolutional-Network-Cascade-for-Facial-Point-Detection' repository.
+
+If you want to download CelebA dataset, please visit their official website: http://mmlab.ie.cuhk.edu.hk/projects/CelebA.html
+You shoule use these images of 'Img\\img_align_celeba' fold.
+The normalization/preprocessing method is in 'read_CelebA_for_level1.py'.
+
+
+
+Runing time:
+according to paper (4 conv layers):
+50*625 batches   16 images a batch   approximately 5mins
+500*625 batches   16 images a batch   approximately 25mins
+5000*625 batches   16 images a batch   approximately 7hours
+
+according to 2 conv layers:
+300*625 batches   16 images a batch   approximately 10mins
+3000*625 batches   16 images a batch   approximately 4hours20mins
+
+according to 3 conv layers:
+50*625 batches   16 images a batch   approximately 5mins
+500*625 batches   16 images a batch   approximately 20mins
+
+training method 2:
+10*12662 batches   16 images a batch   approximately 40mins
+
+runing time per batch (16 images a batch; take 4 conv layers, 10*625 batches for test): 0.00739719 s (NVIDIA GTX860m)
