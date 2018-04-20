@@ -1,9 +1,0 @@
-conv2 and conv3 files are produced by 'zhaoyuzhi'.
-
-conv2: 28*28*1 grey image input --- conv1 (5,1,32) SAME --- pool 2 SAME --- conv2 (5,32,64) SAME --- pool 2 SAME --- fc 1024 --- output 10
-conv3: 39*39*1 grey image input --- conv1 (4,1,20) VALID --- pool 2 SAME --- conv2 (5,20,40) VALID --- pool 2 SAME ---
-       conv3 (4,40,80) VALID --- fc 1024 --- output 10
-
-
-
-I also find that the results of CelebA dataset are not as good as raw dataset peovided by paper author.
