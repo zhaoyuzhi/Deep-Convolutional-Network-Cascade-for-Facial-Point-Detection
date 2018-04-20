@@ -35,6 +35,7 @@ def max_pool_22_layer(x):
     #according to the paper, we use 2x2 max-pooling
     return tf.nn.max_pool(x, ksize = [1,2,2,1], strides = [1,2,2,1], padding='VALID')
 
+'''
 def flatten_layer(x):
     #x_shape = [num_images, img_height, img_width, num_channels]
     x_shape = x.get_shape()
@@ -43,10 +44,7 @@ def flatten_layer(x):
     #get reshaped x whose dimension is [num_images, img_height * img_width * num_channels]
     x_flat = tf.reshape(x, [x_shape[0], x_shape[1] * x_shape[2] * x_shape[3]])
     return x_flat
-
-def fc_layer(x, W, b):
-    #the input weights 'W' and bias 'b' should be predifined before using fc_layer
-    return (tf.matmul(x, W) + b)
+'''
 
 def ImageToMatrix(filename):
     #get numpy matrix of a image
