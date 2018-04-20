@@ -39,9 +39,9 @@ for i in range(4151):                                               #train data 
     rawlandmarks = train_table.row_slice(i+1, start_colx=9, end_colx=15)
     #get ten normalized newlandmarks(coordinates of LE,RE,N,LM,RM)
     for j in range(0,5,2):
-        newlandmarks[j] = (rawlandmarks[j+4].value - train_table.cell(i+1,3).value) / width * 39
+        newlandmarks[j] = (rawlandmarks[j].value - train_table.cell(i+1,3).value) / width * 39
     for k in range(1,6,2):
-        newlandmarks[k] = (rawlandmarks[k+4].value - train_table.cell(i+1,1).value) / height * 39
+        newlandmarks[k] = (rawlandmarks[k].value - train_table.cell(i+1,1).value) / height * 39
     #one dimension which represents one grey picture, set the first dimension as index
     x_data[i,:,:] = imagematrix
     y_data[i,:] = newlandmarks
@@ -57,9 +57,9 @@ for i in range(5849):                                               #train data 
     rawlandmarks = train_table.row_slice(i+4152, start_colx=9, end_colx=15)
     #get ten normalized newlandmarks(coordinates of LE,RE,N,LM,RM)
     for j in range(0,5,2):
-        newlandmarks[j] = (rawlandmarks[j+4].value - train_table.cell(i+4152,3).value) / width * 39
+        newlandmarks[j] = (rawlandmarks[j].value - train_table.cell(i+4152,3).value) / width * 39
     for k in range(1,6,2):
-        newlandmarks[k] = (rawlandmarks[k+4].value - train_table.cell(i+4152,1).value) / height * 39
+        newlandmarks[k] = (rawlandmarks[k].value - train_table.cell(i+4152,1).value) / height * 39
     #one dimension which represents one grey picture, set the first dimension as index
     x_data[i+4151,:,:] = imagematrix
     y_data[i+4151,:] = newlandmarks  
@@ -76,9 +76,9 @@ for i in range(1439):                                               #test data p
     rawlandmarks = test_table.row_slice(i+1, start_colx=9, end_colx=15)
     #get ten normalized newlandmarks(coordinates of LE,RE,N,LM,RM)
     for j in range(0,5,2):
-        newlandmarks[j] = (rawlandmarks[j+4].value - train_table.cell(i+1,3).value) / width * 39
+        newlandmarks[j] = (rawlandmarks[j].value - train_table.cell(i+1,3).value) / width * 39
     for k in range(1,6,2):
-        newlandmarks[k] = (rawlandmarks[k+4].value - train_table.cell(i+1,1).value) / height * 39
+        newlandmarks[k] = (rawlandmarks[k].value - train_table.cell(i+1,1).value) / height * 39
     #one dimension which represents one grey picture, set the first dimension as index
     x_test[i,:,:] = imagematrix
     y_test[i,:] = newlandmarks
@@ -94,9 +94,9 @@ for i in range(2027):                                               #test data p
     rawlandmarks = test_table.row_slice(i+1440, start_colx=9, end_colx=15)
     #get ten normalized newlandmarks(coordinates of LE,RE,N,LM,RM)
     for j in range(0,5,2):
-        newlandmarks[j] = (rawlandmarks[j+4].value - train_table.cell(i+1440,3).value) / width * 39
+        newlandmarks[j] = (rawlandmarks[j].value - train_table.cell(i+1440,3).value) / width * 39
     for k in range(1,6,2):
-        newlandmarks[k] = (rawlandmarks[k+4].value - train_table.cell(i+1440,1).value) / height * 39
+        newlandmarks[k] = (rawlandmarks[k].value - train_table.cell(i+1440,1).value) / height * 39
     #one dimension which represents one grey picture, set the first dimension as index
     x_test[i+1439,:,:] = imagematrix
     y_test[i+1439,:] = newlandmarks
