@@ -31,16 +31,17 @@ I prepare some programs for your test: `F1.py`, `EN1.py`, `NM1.py`, `LE21.py`, `
 </br>
 The number of iterations may be big and you can adjust it (in Session's for loop). The outputs are all percentages. You can change the hyper parameters and see whether the result will be better. Every 500 iterations approximately costs 20-25 mins (GTX860m). But when the number of iterations reach 5000, it costs approximately 6 hours because the laptop is really hot.
 </br>
+There are some .py files that you can run for a test: `F1_CelebA.py` and `F1_run_CelebA.py`. The first one is that take 202599 CelebA dataset as training dataset and 13466 LFPW/webface dataset (author's dataset) as validation dataset. The second one is that using the network trained by F1_CelebA.py to test CASIA dataset.
 
 ## 3 Training Method
 
 #### 3.1 Something Important
 
-All the related programs are well trained by me. If you want to train again, the test_images is writen in the program. I set the iteration as 1000, for F1 network as an example, it means that each of the 10000 input images is used 1000 times (batch size 16 / overall runing 625000 batches). If you want to get a more precise result or you do not want to run the following networks, you can set a higher iteration.
+All the related programs are well trained by me. If you want to train again, the test_images is writen in the program. I set the iteration as 500, for F1 network as an example, it means that each image of the 10000 input imagelib is used 1000 times (batch size 16 / overall runing 625000 batches) when training. If you want to get a more precise result or you do not want to run the following networks, you can set a higher iteration, like 2500 or 5000 or higher.
 </br>
 All the input images are all normalized as grey image and 39*39 pixel. The pixel values are all divided by 255.
 </br>
-In order to enlarge the outputs, I multiply 39 and the relative coordinates of face bounding box, which is easy for me to evaluate the results.
+In order to enlarge the outputs, I multiply 39 and the relative coordinates of face bounding box, which is easy for me to evaluate the results intuitively.
 </br>
 The end condition of training is that the euclidean distance of the prediction position and the ground truth position is less than 5%. In the paper, the euclidean distance is called `err`.
 </br>
@@ -59,9 +60,9 @@ Related programs are: `LE21.py`, `LE21.py`, `RE21.py`, `RE22.py`, `N21.py`, `N22
 The dataset processing and network training works are put together in one program, because at the following two levels we should take training patches centered at positions `randomly shifted` from the ground truth position. So the two works writen in one program is easier for training, because the input region is random and we need not to save the randomly shifted pictures every training time.
 </br>
 So the inputs of networks are randomly shifted pictures. The size of the regions are defined: *21 with ±0.16, *22 with ±0.18, *31 with ±0.12, *32 with ±0.11. For networks at level 2 and level 3, the four boundary positions are relative to the predicted
-facial point position by level 1. The maximum shift in both horizontal and vertical directions is 0.05 at the second level, and 0.02 at the third level, where the distances are normalized with the face bounding box.
+facial point position by level 1. The maximum shift in both horizontal and vertical directions is 0.05 at the second level, and 0.02 at the third level, where the distances are normalized with the face bounding box. Define `rx` as the rate of half the x-direction's length of the input patch and the `ry` as the rate of half the y-direction's length of the input patch. You can see the implemention details in my programs.
 </br>
-For each image, I set 10 randomly shifted numbers so the overall number of images is 100000.
+For each image, I set 20 randomly shifted numbers (for i in range(10)) so the overall number of images is 100000.
 </br>
 As for outputs, for single network like LE21, they are `the shifted x/y coordinates of key points (LE)`. The definition of the randomly shifted numbers are `rx` and `ry` in the programs. And I put the relative coordinates of level 2 bounding box as the outputs: (1-rx)/2 and (1-ry)/2.
 </br>
@@ -70,7 +71,7 @@ As for outputs, for single network like LE21, they are `the shifted x/y coordina
 
 #### 4.1 Something Important
 
-All the related programs are tested by CASIA test dataset. The raw pictures of CASIA dataset is normalized as 144*144 pixel.
+All the related programs are tested by CASIA test dataset. The raw pictures of CASIA dataset is normalized as 144*144 pixel by face detection tools. Then extract the middle 100*100 pixel in order to 
 </br>
 You can only run the `_run.py` to see the results, because the hyper parameters are all well trained in Section 3.
 </br>
@@ -92,7 +93,7 @@ Related programs are: `LE31_run.py`, `LE32_run.py`, `RE31_run.py`, `RE32_run.py`
 </br>
 All the results are saved to excels: `LE31.xlsx`, `LE32.xlsx`, `RE31.xlsx`, `RE32.xlsx`, `N31.xlsx`, `N32.xlsx`, `LM31.xlsx`, `LM32.xlsx`, `RM31.xlsx` and `RM32.xlsx`. Then run `get_level3_keypoints.py`: put the outputs together (average) and get `level3.xlsx`.
 </br>
-The 'level3.xlsx' is the final result. Plot it, and see whether the result is great.
+The `level3.xlsx` is the final result. Plot it, and see whether the result is great.
 </br>
 
 ## 5 Results and Reference
