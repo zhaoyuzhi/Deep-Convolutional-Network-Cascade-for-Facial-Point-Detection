@@ -24,8 +24,6 @@ level1_excel = xlrd.open_workbook('level1.xlsx')
 level1_table = level1_excel.sheet_by_index(0)
 x_data = np.zeros([100000,15,15], dtype = np.float32)               #input imagematrix_data 10*10000 (10 is range of 'j')
 y_data = np.ones([100000,2], dtype = np.float32)                    #correct output landmarks_data
-x_test = np.zeros([34660,15,15], dtype = np.float32)                #10*3466
-y_test = np.ones([34660,2], dtype = np.float32)                     #10*3466
 
 newlandmarks = np.zeros(2, dtype = np.float32)
 
