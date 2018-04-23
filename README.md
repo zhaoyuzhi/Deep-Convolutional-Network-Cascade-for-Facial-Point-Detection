@@ -10,7 +10,7 @@ First you could download the `raw dataset` provided by paper author [dataset web
 
 First of all, you need to bulid a new tensorflow-gpu environment with `python = 3.5`. And then the important libs like PIL, matplotlib, pandas, xlrd and xlwt libs should be installed. I used `Anaconda3` to finish these tasks so I recommend you use it to build relavant environment, which is very convenient.
 </br>
-If your gpu is NVIDIA product, you should also install `CUDA` and `cuDNN`, because they are the necessities of tensorflow-gpu. Before your installing, you need to examine the `computing capability` of your NVIDIA gpu [GPU computing capability](https://blog.csdn.net/real_myth/article/details/44308169). The capability should be larger that `3.0`, and you could not install gpu version of tensorflow if it is smaller. It is important that the specific version of tensorflow-gpu correspond to a certain version of CUDA or cuDNN. For example, my computer is `Win10 + CUDA9.0 + CUDNN7.1 + TensorFlow 1.6`.
+If your gpu is NVIDIA product, you should also install `CUDA` and `cuDNN`, because they are the necessities of tensorflow-gpu. Before your installing, you need to examine the `computing capability` of your NVIDIA gpu [GPU computing capability](https://blog.csdn.net/real_myth/article/details/44308169). The capability should be larger than `3.0`, and you could not install gpu version of tensorflow if it is smaller. It is important that the specific version of tensorflow-gpu correspond to a certain version of CUDA or cuDNN. For example, my computer is `Win10 + CUDA9.0 + CUDNN7.1 + TensorFlow 1.6`.
 </br>
 You can reference [how to build a tensorflow-gpu environment 1](https://blog.csdn.net/lwplwf/article/details/54894364) and [how to build a tensorflow-gpu environment 2](https://blog.csdn.net/lwplwf/article/details/54896088). They are the detailed steps of installing tensorflow-gpu.
 </br>
@@ -66,6 +66,8 @@ For each image, I set 20 randomly shifted numbers (for i in range(10)) so the ov
 </br>
 As for outputs, for single network like LE21, they are `the shifted x/y coordinates of key points (LE)`. The definition of the randomly shifted numbers are `rx` and `ry` in the programs. And I put the relative coordinates of level 2 bounding box as the outputs: (1-rx)/2 and (1-ry)/2.
 </br>
+I upload a `Explanation of LE21 Training Method.png` file which illustrates how to train network LE21. See it, and you will know the level 2 & 3 training principle.
+</br>
 
 ## 4 Testing Method
 
@@ -96,4 +98,10 @@ All the results are saved to excels: `LE31.xlsx`, `LE32.xlsx`, `RE31.xlsx`, `RE3
 The `level3.xlsx` is the final result. Plot it, and see whether the result is great.
 </br>
 
-## 5 Results and Reference
+## 5 Results and Analysis
+
+Maybe the average function defined by me is wrong, and the training error is a little high. If you find the problems in the programs, please let me know. But the testing results are acceptable.
+</br>
+
+## 6 Reference
+Y. Sun, X. Wang and X. Tang, "Deep Convolutional Network Cascade for Facial Point Detection," 2013 IEEE Conference on Computer Vision and Pattern Recognition, Portland, OR, 2013, pp. 3476-3483.
