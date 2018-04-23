@@ -73,7 +73,7 @@ I upload a `Explanation of LE21 Training Method.png` file which illustrates how 
 
 #### 4.1 Something Important
 
-All the related programs are tested by CASIA test dataset. The raw pictures of CASIA dataset is normalized as 144*144 pixel by face detection tools. Then extract the middle 100*100 pixel in order to 
+All the related programs are tested by CASIA test dataset. The raw pictures of CASIA dataset is normalized as 144×144 pixel by face detection tools. Then extract the middle 100×100 pixel in order to 
 </br>
 You can only run the `_run.py` to see the results, because the hyper parameters are all well trained in Section 3.
 </br>
@@ -100,7 +100,11 @@ The `level3.xlsx` is the final result. Plot it, and see whether the result is gr
 
 ## 5 Results and Analysis
 
-Maybe the average function defined by me is wrong, and the training error is a little high. If you find the problems in the programs, please let me know. But the testing results are acceptable.
+Maybe the average function defined by me is unreasonable, and the training error is a little high. If you find the problems in the programs, please let me know. But the testing results are acceptable.
+</br>
+If you want to see the results (.jpg files), please see those .jpg files in the '_run.py- files to test CASIA dataset' folder.
+</br>
+Besides, the paper does not tell us what face detector is used. So I suggest that you enhance the raw dataset, like random cutting (crop), picture flipping, rotating and so on. My time is limited so I do not make some changes on raw pictures. If you find the ways to get better results, please let me know. The pictures of CASIA dataset are 144×144 pixel, and I choose the bounding box to let them closer to the regions detected by paper method. The implemention details are in the programs.
 </br>
 
 ## 6 Reference
