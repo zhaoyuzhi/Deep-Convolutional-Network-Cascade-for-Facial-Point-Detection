@@ -1,0 +1,5 @@
+I suggest that you choose F1 as [22,22,122,122], EN1 as [30,32,118,102] and NM1 as [22,35,122,112].
+
+The three bboxes are so close to the face detector provided by paper author so the results are good.
+
+Then you should check the 'get_level1_keypoints.py' program!
