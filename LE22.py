@@ -181,7 +181,7 @@ regularization_cost = 2 * tf.reduce_sum([ tf.nn.l2_loss(v) for v in tv ])   #2 i
 cost = original_cost + regularization_cost
 Optimizer = tf.train.AdamOptimizer(0.0001).minimize(cost)
 init = tf.global_variables_initializer()
-cache_LE21 = np.zeros([4442,2], dtype = np.float32)                 #run CASIA_test dataset
+cache_LE22 = np.zeros([4442,2], dtype = np.float32)                 #run CASIA_test dataset
 
 with tf.Session() as sess:
     sess.run(init)
