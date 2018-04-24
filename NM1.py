@@ -147,17 +147,17 @@ NM1_a_conv4 = tf.nn.tanh(NM1_h_conv4)                               #outsize = b
 NM1_x_flat = tf.reshape(NM1_a_conv4, [-1,160])                      #outsize = batch*160
 
 ## fully connected layer 1
-EN1_W_fc1 = nl.weight_variable([160,100])
-EN1_b_fc1 = nl.bias_variable([100])
-EN1_h_fc1 = tf.matmul(EN1_x_flat, EN1_W_fc1) + EN1_b_fc1            #outsize = batch*100
-EN1_a_fc1 = tf.nn.relu(EN1_h_fc1)                                   #outsize = batch*100
-EN1_a_fc1_dropout = tf.nn.dropout(EN1_a_fc1, keep_prob)             #dropout layer 1
+NM1_W_fc1 = nl.weight_variable([160,100])
+NM1_b_fc1 = nl.bias_variable([100])
+NM1_h_fc1 = tf.matmul(NM1_x_flat, NM1_W_fc1) + NM1_b_fc1            #outsize = batch*100
+NM1_a_fc1 = tf.nn.relu(NM1_h_fc1)                                   #outsize = batch*100
+NM1_a_fc1_dropout = tf.nn.dropout(NM1_a_fc1, keep_prob)             #dropout layer 1
 
 ## fully connected layer 2
-EN1_W_fc2 = nl.weight_variable([100,6])
-EN1_b_fc2 = nl.bias_variable([6])
-EN1_h_fc2 = tf.matmul(EN1_a_fc1_dropout, EN1_W_fc2) + EN1_b_fc2     #outsize = batch*6
-EN1_a_fc2 = tf.nn.relu(EN1_h_fc2)                                   #outsize = batch*6
+NM1_W_fc2 = nl.weight_variable([100,6])
+NM1_b_fc2 = nl.bias_variable([6])
+NM1_h_fc2 = tf.matmul(NM1_a_fc1_dropout, NM1_W_fc2) + NM1_b_fc2     #outsize = batch*6
+NM1_a_fc2 = tf.nn.relu(NM1_h_fc2)                                   #outsize = batch*6
 
 #regularization and loss function
 original_cost = tf.reduce_mean(tf.pow(y - NM1_a_fc2, 2))
