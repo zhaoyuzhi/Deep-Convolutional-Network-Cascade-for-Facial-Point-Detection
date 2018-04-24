@@ -149,14 +149,14 @@ EN1_x_flat = tf.reshape(EN1_a_conv4, [-1,160])                      #outsize = b
 ## fully connected layer 1
 EN1_W_fc1 = nl.weight_variable([160,100])
 EN1_b_fc1 = nl.bias_variable([100])
-EN1_h_fc1 = nl.fc_layer(EN1_x_flat, EN1_W_fc1, EN1_b_fc1)           #outsize = batch*100
+EN1_h_fc1 = tf.matmul(EN1_x_flat, EN1_W_fc1) + EN1_b_fc1            #outsize = batch*100
 EN1_a_fc1 = tf.nn.relu(EN1_h_fc1)                                   #outsize = batch*100
 EN1_a_fc1_dropout = tf.nn.dropout(EN1_a_fc1, keep_prob)             #dropout layer 1
 
 ## fully connected layer 2
 EN1_W_fc2 = nl.weight_variable([100,6])
 EN1_b_fc2 = nl.bias_variable([6])
-EN1_h_fc2 = nl.fc_layer(EN1_a_fc1_dropout, EN1_W_fc2, EN1_b_fc2)    #outsize = batch*6
+EN1_h_fc2 = tf.matmul(EN1_a_fc1_dropout, EN1_W_fc2) + EN1_b_fc2     #outsize = batch*6
 EN1_a_fc2 = tf.nn.relu(EN1_h_fc2)                                   #outsize = batch*6
 
 #regularization and loss function
