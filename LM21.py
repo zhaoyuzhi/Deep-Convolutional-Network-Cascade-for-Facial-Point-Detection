@@ -164,14 +164,14 @@ x_flat = tf.reshape(a_pool2, [-1,160])                              #outsize = b
 ## fully connected layer 1
 W_fc1 = nl.weight_variable([160,60])
 b_fc1 = nl.bias_variable([60])
-h_fc1 = nl.fc_layer(x_flat, W_fc1, b_fc1)                           #outsize = batch*60
+h_fc1 = tf.matmul(x_flat, W_fc1) + b_fc1                            #outsize = batch*60
 a_fc1 = tf.nn.relu(h_fc1)                                           #outsize = batch*60
 a_fc1_dropout = tf.nn.dropout(a_fc1, keep_prob)                     #dropout layer 1
 
 ## fully connected layer 2
 W_fc2 = nl.weight_variable([60,2])
 b_fc2 = nl.bias_variable([2])
-h_fc2 = nl.fc_layer(a_fc1_dropout, W_fc2, b_fc2)                    #outsize = batch*10
+h_fc2 = tf.matmul(a_fc1_dropout, W_fc2) + b_fc2                     #outsize = batch*10
 a_fc2 = tf.nn.relu(h_fc2)                                           #outsize = batch*10
 
 #regularization and loss function
@@ -181,14 +181,11 @@ regularization_cost = 2 * tf.reduce_sum([ tf.nn.l2_loss(v) for v in tv ])   #2 i
 cost = original_cost + regularization_cost
 Optimizer = tf.train.AdamOptimizer(0.0001).minimize(cost)
 init = tf.global_variables_initializer()
-#average accuracy every batch
-accuracy = tf.reduce_mean((y - a_fc2), 0)                           #average accuracy every batch
-testaccuracy = np.zeros([17330,2], dtype = np.float32)
-cache_LM21 = np.zeros([34660,2], dtype = np.float32)
+cache_LM21 = np.zeros([4442,2], dtype = np.float32)                 #run CASIA_test dataset
 
 with tf.Session() as sess:
     sess.run(init)
-    for i in range(10):                                             #iteration times
+    for i in range(50):                                             #iteration times:50*6250=312500, 5 millon images
         for m in range(6250):                                       #training process using training data 10000 images
             train_xbatch = x_data[(m*16):(m*16+16),:,:]             #train 16 data every batch, not including m*16+16
             train_ybatch = y_data[(m*16):(m*16+16),:]               #train 16 data every batch, not including m*16+16
