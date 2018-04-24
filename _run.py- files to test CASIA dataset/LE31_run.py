@@ -24,8 +24,6 @@ level2_excel = xlrd.open_workbook('level2.xlsx')
 level2_table = level2_excel.sheet_by_index(0)
 x_data = np.zeros([100000,15,15], dtype = np.float32)               #input imagematrix_data 10*10000 (10 is range of 'j')
 y_data = np.ones([100000,2], dtype = np.float32)                    #correct output landmarks_data
-x_test = np.zeros([34660,15,15], dtype = np.float32)                #10*3466
-y_test = np.ones([34660,2], dtype = np.float32)                     #10*3466
 
 newlandmarks = np.zeros(2, dtype = np.float32)
 
@@ -129,14 +127,14 @@ x_flat = tf.reshape(a_pool2, [-1,160])                              #outsize = b
 ## fully connected layer 1
 W_fc1 = nl.weight_variable([160,60])
 b_fc1 = nl.bias_variable([60])
-h_fc1 = nl.fc_layer(x_flat, W_fc1, b_fc1)                           #outsize = batch*60
+h_fc1 = tf.matmul(x_flat, W_fc1) + b_fc1                            #outsize = batch*60
 a_fc1 = tf.nn.relu(h_fc1)                                           #outsize = batch*60
 a_fc1_dropout = tf.nn.dropout(a_fc1, keep_prob)                     #dropout layer 1
 
 ## fully connected layer 2
 W_fc2 = nl.weight_variable([60,2])
 b_fc2 = nl.bias_variable([2])
-h_fc2 = nl.fc_layer(a_fc1_dropout, W_fc2, b_fc2)                    #outsize = batch*10
+h_fc2 = tf.matmul(a_fc1_dropout, W_fc2) + b_fc2                     #outsize = batch*10
 a_fc2 = tf.nn.relu(h_fc2)                                           #outsize = batch*10
 
 #regularization and loss function
@@ -150,7 +148,7 @@ cache_LE31 = np.zeros([4442,2], dtype = np.float32)                 #run CASIA_t
 
 with tf.Session() as sess:
     sess.run(init)
-    for i in range(10):                                             #iteration times
+    for i in range(50):                                             #iteration times:50*6250=312500, 5 millon images
         for m in range(6250):                                       #training process using training data 10000 images
             train_xbatch = x_data[(m*16):(m*16+16),:,:]             #train 16 data every batch, not including m*16+16
             train_ybatch = y_data[(m*16):(m*16+16),:]               #train 16 data every batch, not including m*16+16
