@@ -84,7 +84,29 @@ for i in range(4442):
     newdata = np.reshape(npdata, (31,39))
     CASIA_test[i,:,:] = newdata
 
-## F1
+## define function for CNN
+def weight_variable(shape):
+    # Truncated normal distribution function
+    # shape is kernel size, insize and outsize
+	initial = tf.truncated_normal(shape, stddev=0.1)
+	return tf.Variable(initial)
+
+def bias_variable(shape):
+    initial = tf.constant(0.1, shape=shape)
+    return tf.Variable(initial)
+
+def conv2d(x, W):
+    # stride = [1,x_movement,y_movement,1]
+    # must have strides[0] = strides[3] = 1
+    return tf.nn.conv2d(x, W, strides = [1,1,1,1], padding='VALID')
+
+def max_pool_22(x):
+    # stride = [1,x_movement,y_movement,1]
+    # must have strides[0] = strides[3] = 1
+    # ksize(kernel size) = [1,length,height,1]
+    return tf.nn.max_pool(x, ksize = [1,2,2,1], strides = [1,2,2,1], padding='SAME')
+
+## NM1
 x = tf.placeholder(tf.float32, shape=[None,31,39], name='x')        #input imagematrix_data to be fed
 y = tf.placeholder(tf.float32, shape=[None,6], name='y')            #correct output to be fed
 keep_prob = tf.placeholder(tf.float32, name='keep_prob')            #keep_prob parameter to be fed
@@ -92,54 +114,54 @@ keep_prob = tf.placeholder(tf.float32, name='keep_prob')            #keep_prob p
 x_image = tf.reshape(x, [-1,31,39,1])
 
 ## convolutional layer 1, kernel 4*4, insize 1, outsize 20
-NM1_W_conv1 = nl.weight_variable([4,4,1,20])
-NM1_b_conv1 = nl.bias_variable([20])
-NM1_h_conv1 = nl.conv_layer(x_image, NM1_W_conv1) + NM1_b_conv1     #outsize = batch*28*36*20
-NM1_a_conv1 = tf.nn.relu(NM1_h_conv1)                               #outsize = batch*28*36*20
+NM1_W_conv1 = weight_variable([4,4,1,20])
+NM1_b_conv1 = bias_variable([20])
+NM1_h_conv1 = conv2d(x_image, NM1_W_conv1) + NM1_b_conv1     #outsize = batch*28*36*20
+NM1_a_conv1 = tf.nn.tanh(NM1_h_conv1)                               #outsize = batch*28*36*20
 
 ## max pooling layer 1
-NM1_h_pool1 = nl.max_pool_22_layer(NM1_a_conv1)                     #outsize = batch*14*18*20
-NM1_a_pool1 = tf.nn.relu(NM1_h_pool1)                               #outsize = batch*14*18*20
+NM1_h_pool1 = max_pool_22(NM1_a_conv1)                              #outsize = batch*14*18*20
+NM1_a_pool1 = tf.nn.tanh(NM1_h_pool1)                               #outsize = batch*14*18*20
 
 ## convolutional layer 2, kernel 3*3, insize 20, outsize 40
-NM1_W_conv2 = nl.weight_variable([3,3,20,40])
-NM1_b_conv2 = nl.bias_variable([40])
-NM1_h_conv2 = nl.conv_layer(NM1_a_pool1, NM1_W_conv2) + NM1_b_conv2 #outsize = batch*12*16*40
-NM1_a_conv2 = tf.nn.relu(NM1_h_conv2)                               #outsize = batch*12*16*40
+NM1_W_conv2 = weight_variable([3,3,20,40])
+NM1_b_conv2 = bias_variable([40])
+NM1_h_conv2 = conv2d(NM1_a_pool1, NM1_W_conv2) + NM1_b_conv2        #outsize = batch*12*16*40
+NM1_a_conv2 = tf.nn.tanh(NM1_h_conv2)                               #outsize = batch*12*16*40
 
 ## max pooling layer 2
-NM1_h_pool2 = nl.max_pool_22_layer(NM1_a_conv2)                     #outsize = batch*6*8*40
-NM1_a_pool2 = tf.nn.relu(NM1_h_pool2)                               #outsize = batch*6*8*40
+NM1_h_pool2 = max_pool_22(NM1_a_conv2)                              #outsize = batch*6*8*40
+NM1_a_pool2 = tf.nn.tanh(NM1_h_pool2)                               #outsize = batch*6*8*40
 
 ## convolutional layer 3, kernel 3*3, insize 40, outsize 60
-NM1_W_conv3 = nl.weight_variable([3,3,40,60])
-NM1_b_conv3 = nl.bias_variable([60])
-NM1_h_conv3 = nl.conv_layer(NM1_a_pool2, NM1_W_conv3) + NM1_b_conv3 #outsize = batch*4*6*60
-NM1_a_conv3 = tf.nn.relu(NM1_h_conv3)                               #outsize = batch*4*6*60
+NM1_W_conv3 = weight_variable([3,3,40,60])
+NM1_b_conv3 = bias_variable([60])
+NM1_h_conv3 = conv2d(NM1_a_pool2, NM1_W_conv3) + NM1_b_conv3        #outsize = batch*4*6*60
+NM1_a_conv3 = tf.nn.tanh(NM1_h_conv3)                               #outsize = batch*4*6*60
 
 ## max pooling layer 3
-NM1_h_pool3 = nl.max_pool_22_layer(NM1_a_conv3)                     #outsize = batch*2*3*60
-NM1_a_pool3 = tf.nn.relu(NM1_h_pool3)                               #outsize = batch*2*3*60
+NM1_h_pool3 = max_pool_22(NM1_a_conv3)                              #outsize = batch*2*3*60
+NM1_a_pool3 = tf.nn.tanh(NM1_h_pool3)                               #outsize = batch*2*3*60
 
 ## convolutional layer 4, kernel 2*2, insize 60, outsize 80
-NM1_W_conv4 = nl.weight_variable([2,2,60,80])
-NM1_b_conv4 = nl.bias_variable([80])
-NM1_h_conv4 = nl.conv_layer(NM1_a_pool3, NM1_W_conv4) + NM1_b_conv4 #outsize = batch*1*2*80
-NM1_a_conv4 = tf.nn.relu(NM1_h_conv4)                               #outsize = batch*1*2*80
+NM1_W_conv4 = weight_variable([2,2,60,80])
+NM1_b_conv4 = bias_variable([80])
+NM1_h_conv4 = conv2d(NM1_a_pool3, NM1_W_conv4) + NM1_b_conv4        #outsize = batch*1*2*80
+NM1_a_conv4 = tf.nn.tanh(NM1_h_conv4)                               #outsize = batch*1*2*80
 
 ## flatten layer
 NM1_x_flat = tf.reshape(NM1_a_conv4, [-1,160])                      #outsize = batch*160
 
 ## fully connected layer 1
-NM1_W_fc1 = nl.weight_variable([160,100])
-NM1_b_fc1 = nl.bias_variable([100])
+NM1_W_fc1 = weight_variable([160,100])
+NM1_b_fc1 = bias_variable([100])
 NM1_h_fc1 = tf.matmul(NM1_x_flat, NM1_W_fc1) + NM1_b_fc1            #outsize = batch*100
 NM1_a_fc1 = tf.nn.relu(NM1_h_fc1)                                   #outsize = batch*100
 NM1_a_fc1_dropout = tf.nn.dropout(NM1_a_fc1, keep_prob)             #dropout layer 1
 
 ## fully connected layer 2
-NM1_W_fc2 = nl.weight_variable([100,6])
-NM1_b_fc2 = nl.bias_variable([6])
+NM1_W_fc2 = weight_variable([100,6])
+NM1_b_fc2 = bias_variable([6])
 NM1_h_fc2 = tf.matmul(NM1_a_fc1_dropout, NM1_W_fc2) + NM1_b_fc2     #outsize = batch*6
 NM1_a_fc2 = tf.nn.relu(NM1_h_fc2)                                   #outsize = batch*6
 
