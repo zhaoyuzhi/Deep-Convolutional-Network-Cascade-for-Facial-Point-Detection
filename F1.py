@@ -100,6 +100,28 @@ for i in range(2027):                                               #test data p
     x_test[i+1439,:,:] = imagematrix
     y_test[i+1439,:] = newlandmarks
 
+## define function for CNN
+def weight_variable(shape):
+    # Truncated normal distribution function
+    # shape is kernel size, insize and outsize
+	initial = tf.truncated_normal(shape, stddev=0.1)
+	return tf.Variable(initial)
+
+def bias_variable(shape):
+    initial = tf.constant(0.1, shape=shape)
+    return tf.Variable(initial)
+
+def conv2d(x, W):
+    # stride = [1,x_movement,y_movement,1]
+    # must have strides[0] = strides[3] = 1
+    return tf.nn.conv2d(x, W, strides = [1,1,1,1], padding='VALID')
+
+def max_pool_22(x):
+    # stride = [1,x_movement,y_movement,1]
+    # must have strides[0] = strides[3] = 1
+    # ksize(kernel size) = [1,length,height,1]
+    return tf.nn.max_pool(x, ksize = [1,2,2,1], strides = [1,2,2,1], padding='SAME')
+
 ## F1
 x = tf.placeholder(tf.float32, shape=[None,39,39], name='x')        #input imagematrix_data to be fed
 y = tf.placeholder(tf.float32, shape=[None,10], name='y')           #correct output to be fed
@@ -108,39 +130,39 @@ keep_prob = tf.placeholder(tf.float32, name='keep_prob')            #keep_prob p
 x_image = tf.reshape(x, [-1,39,39,1])
 
 ## convolutional layer 1, kernel 4*4, insize 1, outsize 20
-W_conv1 = nl.weight_variable([4,4,1,20])
-b_conv1 = nl.bias_variable([20])
-h_conv1 = nl.conv_layer(x_image, W_conv1) + b_conv1                 #outsize = batch*36*36*20
+W_conv1 = weight_variable([4,4,1,20])
+b_conv1 = bias_variable([20])
+h_conv1 = conv2d(x_image, W_conv1) + b_conv1                        #outsize = batch*36*36*20
 a_conv1 = tf.nn.relu(h_conv1)                                       #outsize = batch*36*36*20
 
 ## max pooling layer 1
-h_pool1 = nl.max_pool_22_layer(a_conv1)                             #outsize = batch*18*18*20
+h_pool1 = max_pool_22(a_conv1)                                      #outsize = batch*18*18*20
 a_pool1 = tf.nn.relu(h_pool1)                                       #outsize = batch*18*18*20
 
 ## convolutional layer 2, kernel 3*3, insize 20, outsize 40
-W_conv2 = nl.weight_variable([3,3,20,40])
-b_conv2 = nl.bias_variable([40])
-h_conv2 = nl.conv_layer(a_pool1, W_conv2) + b_conv2                 #outsize = batch*16*16*40
+W_conv2 = weight_variable([3,3,20,40])
+b_conv2 = bias_variable([40])
+h_conv2 = conv2d(a_pool1, W_conv2) + b_conv2                        #outsize = batch*16*16*40
 a_conv2 = tf.nn.relu(h_conv2)                                       #outsize = batch*16*16*40
 
 ## max pooling layer 2
-h_pool2 = nl.max_pool_22_layer(a_conv2)                             #outsize = batch*8*8*40
+h_pool2 = max_pool_22(a_conv2)                                      #outsize = batch*8*8*40
 a_pool2 = tf.nn.relu(h_pool2)                                       #outsize = batch*8*8*40
 
 ## convolutional layer 3, kernel 3*3, insize 40, outsize 60
-W_conv3 = nl.weight_variable([3,3,40,60])
-b_conv3 = nl.bias_variable([60])
-h_conv3 = nl.conv_layer(a_pool2, W_conv3) + b_conv3                 #outsize = batch*6*6*60
+W_conv3 = weight_variable([3,3,40,60])
+b_conv3 = bias_variable([60])
+h_conv3 = conv2d(a_pool2, W_conv3) + b_conv3                        #outsize = batch*6*6*60
 a_conv3 = tf.nn.relu(h_conv3)                                       #outsize = batch*6*6*60
 
 ## max pooling layer 3
-h_pool3 = nl.max_pool_22_layer(a_conv3)                             #outsize = batch*3*3*60
+h_pool3 = max_pool_22(a_conv3)                                      #outsize = batch*3*3*60
 a_pool3 = tf.nn.relu(h_pool3)                                       #outsize = batch*3*3*60
 
 ## convolutional layer 4, kernel 2*2, insize 60, outsize 80
-W_conv4 = nl.weight_variable([2,2,60,80])
-b_conv4 = nl.bias_variable([80])
-h_conv4 = nl.conv_layer(a_pool3, W_conv4) + b_conv4                 #outsize = batch*2*2*80
+W_conv4 = weight_variable([2,2,60,80])
+b_conv4 = bias_variable([80])
+h_conv4 = conv2d(a_pool3, W_conv4) + b_conv4                        #outsize = batch*2*2*80
 a_conv4 = tf.nn.relu(h_conv4)                                       #outsize = batch*2*2*80
 
 ## flatten layer
