@@ -116,7 +116,7 @@ x_image = tf.reshape(x, [-1,31,39,1])
 ## convolutional layer 1, kernel 4*4, insize 1, outsize 20
 NM1_W_conv1 = weight_variable([4,4,1,20])
 NM1_b_conv1 = bias_variable([20])
-NM1_h_conv1 = conv2d(x_image, NM1_W_conv1) + NM1_b_conv1     #outsize = batch*28*36*20
+NM1_h_conv1 = conv2d(x_image, NM1_W_conv1) + NM1_b_conv1     	    #outsize = batch*28*36*20
 NM1_a_conv1 = tf.nn.tanh(NM1_h_conv1)                               #outsize = batch*28*36*20
 
 ## max pooling layer 1
