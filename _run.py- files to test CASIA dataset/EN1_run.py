@@ -117,37 +117,37 @@ x_image = tf.reshape(x, [-1,31,39,1])
 EN1_W_conv1 = weight_variable([4,4,1,20])
 EN1_b_conv1 = bias_variable([20])
 EN1_h_conv1 = conv2d(x_image, EN1_W_conv1) + EN1_b_conv1            #outsize = batch*28*36*20
-EN1_a_conv1 = tf.nn.tanh(EN1_h_conv1)                               #outsize = batch*28*36*20
+EN1_a_conv1 = tf.nn.relu(EN1_h_conv1)                               #outsize = batch*28*36*20
 
 ## max pooling layer 1
 EN1_h_pool1 = max_pool_22(EN1_a_conv1)                              #outsize = batch*14*18*20
-EN1_a_pool1 = tf.nn.tanh(EN1_h_pool1)                               #outsize = batch*14*18*20
+EN1_a_pool1 = tf.nn.relu(EN1_h_pool1)                               #outsize = batch*14*18*20
 
 ## convolutional layer 2, kernel 3*3, insize 20, outsize 40
 EN1_W_conv2 = weight_variable([3,3,20,40])
 EN1_b_conv2 = bias_variable([40])
 EN1_h_conv2 = conv2d(EN1_a_pool1, EN1_W_conv2) + EN1_b_conv2        #outsize = batch*12*16*40
-EN1_a_conv2 = tf.nn.tanh(EN1_h_conv2)                               #outsize = batch*12*16*40
+EN1_a_conv2 = tf.nn.relu(EN1_h_conv2)                               #outsize = batch*12*16*40
 
 ## max pooling layer 2
 EN1_h_pool2 = max_pool_22(EN1_a_conv2)                              #outsize = batch*6*8*40
-EN1_a_pool2 = tf.nn.tanh(EN1_h_pool2)                               #outsize = batch*6*8*40
+EN1_a_pool2 = tf.nn.relu(EN1_h_pool2)                               #outsize = batch*6*8*40
 
 ## convolutional layer 3, kernel 3*3, insize 40, outsize 60
 EN1_W_conv3 = weight_variable([3,3,40,60])
 EN1_b_conv3 = bias_variable([60])
 EN1_h_conv3 = conv2d(EN1_a_pool2, EN1_W_conv3) + EN1_b_conv3        #outsize = batch*4*6*60
-EN1_a_conv3 = tf.nn.tanh(EN1_h_conv3)                               #outsize = batch*4*6*60
+EN1_a_conv3 = tf.nn.relu(EN1_h_conv3)                               #outsize = batch*4*6*60
 
 ## max pooling layer 3
 EN1_h_pool3 = nl.max_pool_22_layer(EN1_a_conv3)                     #outsize = batch*2*3*60
-EN1_a_pool3 = tf.nn.tanh(EN1_h_pool3)                               #outsize = batch*2*3*60
+EN1_a_pool3 = tf.nn.relu(EN1_h_pool3)                               #outsize = batch*2*3*60
 
 ## convolutional layer 4, kernel 2*2, insize 60, outsize 80
 EN1_W_conv4 = weight_variable([2,2,60,80])
 EN1_b_conv4 = bias_variable([80])
 EN1_h_conv4 = conv2d(EN1_a_pool3, EN1_W_conv4) + EN1_b_conv4        #outsize = batch*1*2*80
-EN1_a_conv4 = tf.nn.tanh(EN1_h_conv4)                               #outsize = batch*1*2*80
+EN1_a_conv4 = tf.nn.relu(EN1_h_conv4)                               #outsize = batch*1*2*80
 
 ## flatten layer
 EN1_x_flat = tf.reshape(EN1_a_conv4, [-1,160])                      #outsize = batch*160
