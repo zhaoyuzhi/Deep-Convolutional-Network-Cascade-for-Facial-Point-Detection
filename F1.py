@@ -192,6 +192,8 @@ init = tf.global_variables_initializer()
 accuracy = tf.reduce_mean((y - a_fc2), 0)                           #average accuracy every batch
 testaccuracy = np.zeros([27,10], dtype = np.float32)
 cache_F1 = np.zeros([3456,10], dtype = np.float32)
+#save the model
+saver = tf.train.Saver()
 
 with tf.Session() as sess:
     sess.run(init)
@@ -206,6 +208,10 @@ with tf.Session() as sess:
                 print('The iteration number is:',iteration)
                 print('The loss is:',sess.run(original_cost, feed_dict = {xs:train_xbatch, ys:train_ybatch, keep_prob:1}))
 	    '''
+	'''
+	if i % 50 == 0:
+	    save_path = saver.save(sess, "F1_net/save_net.ckpt")    #save the model
+	'''
 
     for k in range(27):
         test_xbatch = x_test[(k*128):(k*128+128),:,:]               #train 128 data every time, not including m*100+100
