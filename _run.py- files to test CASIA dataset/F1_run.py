@@ -64,41 +64,6 @@ for i in range(5849):                                               #train data 
     x_data[i+4151,:,:] = imagematrix
     y_data[i+4151,:] = newlandmarks
 
-'''
-# create new images: 20000 You need not to run this code
-for i in range(10000):
-    for j in range(39):
-        for k in range(19):
-            x_data[i+10000,j,k] = x_data[i,j,38-k]
-        x_data[i+10000,j,19] = x_data[i,j,19]
-    y_data[i+10000,0] = 39 - y_data[i,2]
-    y_data[i+10000,1] = y_data[i,3]
-    y_data[i+10000,2] = 39 - y_data[i,0]
-    y_data[i+10000,3] = y_data[i,1]
-    y_data[i+10000,4] = 39 - y_data[i,4]
-    y_data[i+10000,5] = y_data[i,5]
-    y_data[i+10000,6] = 39 - y_data[i,8]
-    y_data[i+10000,7] = y_data[i,9]
-    y_data[i+10000,8] = 39 - y_data[i,6]
-    y_data[i+10000,9] = y_data[i,7]
-
-for i in range(3466):
-    for j in range(39):
-        for k in range(19):
-            x_test[i+3466,j,k] = x_test[i,j,38-k]
-        x_test[i+3466,j,19] = x_test[i,j,19]
-    y_test[i+3466,0] = 39 - y_test[i,2]
-    y_test[i+3466,1] = y_test[i,3]
-    y_test[i+3466,2] = 39 - y_test[i,0]
-    y_test[i+3466,3] = y_test[i,1]
-    y_test[i+3466,4] = 39 - y_test[i,4]
-    y_test[i+3466,5] = y_test[i,5]
-    y_test[i+3466,6] = 39 - y_test[i,8]
-    y_test[i+3466,7] = y_test[i,9]
-    y_test[i+3466,8] = 39 - y_test[i,6]
-    y_test[i+3466,9] = y_test[i,7]
-'''
-
 # read actual test data
 for i in range(4442):
     #get 39*39 numpy matrix of a single image
@@ -208,6 +173,10 @@ with tf.Session() as sess:
             train_xbatch = x_data[(m*16):(m*16+16),:,:]             #train 16 data every batch, not including m*16+16
             train_ybatch = y_data[(m*16):(m*16+16),:]               #train 16 data every batch, not including m*16+16
             sess.run(Optimizer, feed_dict = {x:train_xbatch, y:train_ybatch, keep_prob:0.5})
+	    if m % 125 == 0:
+                iteration = i * 625 + m
+                print('The iteration number is:',iteration)
+                print('The loss is:',sess.run(original_cost, feed_dict = {xs:train_xbatch, ys:train_ybatch, keep_prob:1}))
             
     for k in range(2221):
         test_xbatch = CASIA_test[(k*2):(k*2+2),:,:]                 #train 2 data every batch, not including m*2+2
