@@ -182,7 +182,7 @@ h_fc2 = tf.matmul(a_fc1_dropout, W_fc2) + b_fc2                     #outsize = b
 a_fc2 = tf.nn.relu(h_fc2)                                           #outsize = batch*10
 
 #regularization and loss function
-original_cost = tf.reduce_mean(tf.pow(y - a_fc2, 2), reduction_indices=[1])
+original_cost = tf.reduce_mean(tf.pow(y - a_fc2, 2))
 tv = tf.trainable_variables()   #L2 regularization
 regularization_cost = 2 * tf.reduce_sum([ tf.nn.l2_loss(v) for v in tv ])   #2 is a hyper parameter
 cost = original_cost + regularization_cost
@@ -200,6 +200,12 @@ with tf.Session() as sess:
             train_xbatch = x_data[(m*16):(m*16+16),:,:]             #train 16 data every batch, not including m*16+16
             train_ybatch = y_data[(m*16):(m*16+16),:]               #train 16 data every batch, not including m*16+16
             sess.run(Optimizer, feed_dict = {x:train_xbatch, y:train_ybatch, keep_prob:0.5})
+	    '''
+	    if m % 125 == 0:
+                iteration = i * 625 + m
+                print('The iteration number is:',iteration)
+                print('The loss is:',sess.run(original_cost, feed_dict = {xs:train_xbatch, ys:train_ybatch, keep_prob:1}))
+	    '''
 
     for k in range(27):
         test_xbatch = x_test[(k*128):(k*128+128),:,:]               #train 128 data every time, not including m*100+100
