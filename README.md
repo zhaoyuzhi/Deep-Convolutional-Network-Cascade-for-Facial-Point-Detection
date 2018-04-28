@@ -32,12 +32,15 @@ I prepare some programs for your test: `F1.py`, `EN1.py`, `NM1.py`, `LE21.py`, `
 The number of iterations may be big and you can adjust it (in Session's for loop). The outputs are all percentages. You can change the hyper parameters and see whether the result will be better. Every 500 iterations approximately costs 20-25 mins (GTX860m). But when the number of iterations reach 5000, it costs approximately 6 hours because the laptop is really hot.
 </br>
 There are some .py files that you can run for a test: `F1_CelebA.py` and `F1_run_CelebA.py`. The first one is that take 202599 CelebA dataset as training dataset and 13466 LFPW/webface dataset (author's dataset) as validation dataset. The second one is that using the network trained by F1_CelebA.py to test CASIA dataset.
+</br>
 
 ## 3 Training Method
 
 #### 3.1 Something Important
 
-All the related programs are well trained by me. If you want to train again, the test_images is writen in the program. I set the iteration as 500, for F1 network as an example, it means that each image of the 10000 input imagelib is used 1000 times (batch size 16 / overall runing 625000 batches) when training. If you want to get a more precise result or you do not want to run the following networks, you can set a higher iteration, like 2500 or 5000 or higher.
+All the related programs are well trained by me. If you want to train again, the test_images is writen in the program. I set the iteration as 500, for F1 network as an example, it means that each image of the 10000 input images is used 500 times (batch size 16 / overall runing 312500 batches) when training. If you want to get a more precise result or you do not want to run the following networks, you can set a higher iteration, like 2500 or higher.
+</br>
+You know, the meaning of `iteration` defined by me is a little different. And I can tell you when the F1 iteration time gets 1600 (batch size 16 / overall runing 1000000 batches), the loss is 0.38. When the iteration time gets 2558 (batch size 16 / overall runing 1598750 batches), the loss is 0.23. When the iteration time gets 5000, the loss is only 0.14. The definition of loss function is euclidean distance or variance so the loss is very low.
 </br>
 All the input images are all normalized as grey image and 39*39 pixel. The pixel values are all divided by 255.
 </br>
@@ -102,9 +105,13 @@ The `level3.xlsx` is the final result. Plot it, and see whether the result is gr
 
 Maybe the average function defined by me is unreasonable, and the training error is a little high. If you find the problems in the programs, please let me know. But the testing results are acceptable.
 </br>
-If you want to see the results (.jpg files), please see those .jpg files in the '_run.py- files to test CASIA dataset' folder.
+If you want to see the results (.jpg files), please see those .jpg files in the `_run.py- files to test CASIA dataset` folder.
 </br>
 Besides, the paper does not tell us what face detector is used. So I suggest that you enhance the raw dataset, like random cutting (crop), picture flipping, rotating and so on. My time is limited so I do not make some changes on raw pictures. If you find the ways to get better results, please let me know. The pictures of CASIA dataset are 144×144 pixel, and I choose the bounding box to let them closer to the regions detected by paper method. The implemention details are in the programs.
+</br>
+If you want to undertake `transfer learning`, I can provide you the `.ckpt` files of level 1 (iteration ). You could just leave a message to me, and I will contact you as soon as possible.
+</br>
+Besides, I found that L2 regularization is little useful. You can delete it.
 </br>
 
 ## 6 Reference
