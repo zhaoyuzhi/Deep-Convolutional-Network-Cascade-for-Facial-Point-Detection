@@ -209,8 +209,8 @@ with tf.Session() as sess:
             save_path = saver.save(sess, "EN1_net/save_net.ckpt")   #save the model
         
     for n in range(27):
-        test_xbatch = x_test[(n*128):(n*128+128),:,:]               #test 128 data every time, not including m*128+128
-        test_ybatch = y_test[(n*128):(n*128+128),:]
+        test_xbatch = x_test[(k*128):(k*128+128),:,:]               #test 128 data every batch, not including k*128+128
+        test_ybatch = y_test[(k*128):(k*128+128),:]		    #test 128 data every batch, not including k*128+128
         testaccuracy[n,:] = accuracy.eval(feed_dict = {x:test_xbatch, y:test_ybatch, keep_prob:1})
 
 #print euclidean distance of the keypoints
