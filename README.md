@@ -29,7 +29,7 @@ The `read_pictures_for_level2_level3.py` is a small test. You can run it to see 
 
 I prepare some programs for your test: `F1.py`, `EN1.py`, `NM1.py`, `LE21.py`, `LE31.py`. Please run some of them and you can see the results, which are the `err` definition in the paper. It is important that the PATH of the folders (see Section 1.2) are related to desktop, if your saving URLs are not desktop, you need to replace the variables in the programs.
 </br>
-The number of iterations may be big and you can adjust it (in Session's for loop). The outputs are all percentages. You can change the hyper parameters and see whether the result will be better. Every 500 iterations approximately costs 20-25 mins (GTX860m). But when the number of iterations reach 5000, it costs approximately 6 hours because the laptop is really hot.
+The number of iterations may be big and you can adjust it (in Session's for loop). The outputs are all percentages. You can change the hyper parameters and see whether the result will be better. Every 500 iterations approximately costs 20-25 mins (GTX860m). But when the number of iterations reach 5000, it costs approximately 6-8 hours because the laptop is really hot.
 </br>
 There are some .py files that you can run for a test: `F1_CelebA.py` and `F1_run_CelebA.py`. The first one is that take 202599 CelebA dataset as training dataset and 13466 LFPW/webface dataset (author's dataset) as validation dataset. The second one is that using the network trained by F1_CelebA.py to test CASIA dataset.
 </br>
