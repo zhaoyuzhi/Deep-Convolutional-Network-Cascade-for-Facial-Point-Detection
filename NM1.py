@@ -183,8 +183,8 @@ NM1_a_fc2 = tf.nn.relu(NM1_h_fc2)                                   #outsize = b
 
 #regularization and loss function
 original_cost = tf.reduce_mean(tf.pow(y - NM1_a_fc2, 2))
-tv = tf.trainable_variables()   #L2 regularization
-regularization_cost = 2 * tf.reduce_sum([ tf.nn.l2_loss(v) for v in tv ])   #2 is a hyper parameter
+tv = tf.trainable_variables()   #L2 regularization, λ = 1, 2n = 2 * 16 = 32
+regularization_cost = 1 / 32 * tf.reduce_sum([ tf.nn.l2_loss(v) for v in tv ])   #1 / 32 is a hyper parameter
 cost = original_cost + regularization_cost
 Optimizer = tf.train.AdamOptimizer(0.0001).minimize(cost)
 init = tf.global_variables_initializer()
