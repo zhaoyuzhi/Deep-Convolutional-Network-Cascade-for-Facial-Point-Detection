@@ -197,7 +197,7 @@ saver = tf.train.Saver()
 
 with tf.Session() as sess:
     sess.run(init)
-    for i in range(5001):                                           #number of iterations:500*625=312500, 5 millon images
+    for i in range(5001):                                           #number of iterations:5000*625=3125000, 50 millon images
         for m in range(625):                                        #training process using training data 10000 images
             train_xbatch = x_data[(m*16):(m*16+16),:,:]             #train 16 data every batch, not including m*16+16
             train_ybatch = y_data[(m*16):(m*16+16),:]               #train 16 data every batch, not including m*16+16
