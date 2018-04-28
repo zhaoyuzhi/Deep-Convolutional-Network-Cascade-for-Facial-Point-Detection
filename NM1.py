@@ -209,7 +209,7 @@ with tf.Session() as sess:
             save_path = saver.save(sess, "NM1_net/save_net.ckpt")   #save the model
         
     for n in range(27):
-        test_xbatch = x_test[(n*128):(n*128+128),:,:]               #train 100 data every time, not including m*100+100
+        test_xbatch = x_test[(n*128):(n*128+128),:,:]               #test 128 data every time, not including m*128+128
         test_ybatch = y_test[(n*128):(n*128+128),:]
         testaccuracy[n,:] = accuracy.eval(feed_dict = {x:test_xbatch, y:test_ybatch, keep_prob:1})
 
