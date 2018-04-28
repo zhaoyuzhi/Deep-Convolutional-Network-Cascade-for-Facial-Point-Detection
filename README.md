@@ -109,7 +109,7 @@ If you want to see the results (.jpg files), please see those .jpg files in the 
 </br>
 Besides, the paper does not tell us what face detector is used. So I suggest that you enhance the raw dataset, like random cutting (crop), picture flipping, rotating and so on. My time is limited so I do not make some changes on raw pictures. If you find the ways to get better results, please let me know. The pictures of CASIA dataset are 144×144 pixel, and I choose the bounding box to let them closer to the regions detected by paper method. The implemention details are in the programs.
 </br>
-If you want to undertake `transfer learning`, I can provide you the `.ckpt` files of level 1 (iteration ). You could just leave a message to me, and I will contact you as soon as possible.
+If you want to undertake `transfer learning`, I can provide you the `.ckpt` files of level 1 (iteration time 5000). You could just leave a message to me, and I will contact you as soon as possible.
 </br>
 Besides, I found that L2 regularization is little useful. You can delete it.
 </br>
