@@ -210,8 +210,8 @@ with tf.Session() as sess:
             save_path = saver.save(sess, "EN1_net/save_net.ckpt")   #save the model
 
     for k in range(27):
-        test_xbatch = x_test[(k*128):(k*128+128),:,:]               #test 128 data every time, not including m*128+128
-        test_ybatch = y_test[(k*128):(k*128+128),:]
+        test_xbatch = x_test[(k*128):(k*128+128),:,:]               #test 128 data every batch, not including k*128+128
+        test_ybatch = y_test[(k*128):(k*128+128),:]		    #test 128 data every batch, not including k*128+128
         testaccuracy[k,:] = accuracy.eval(feed_dict = {x:test_xbatch, y:test_ybatch, keep_prob:1})
         cache_F1[(k*128):(k*128+128),:] = a_fc2.eval(feed_dict = {x:test_xbatch, keep_prob:1})
 
