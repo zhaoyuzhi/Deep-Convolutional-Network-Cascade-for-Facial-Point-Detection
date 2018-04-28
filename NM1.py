@@ -206,7 +206,7 @@ with tf.Session() as sess:
                 print('The iteration number is:',iteration)
                 print('The loss is:',sess.run(original_cost, feed_dict = {x:train_xbatch, y:train_ybatch, keep_prob:1}))
         if i % 50 == 0:
-            save_path = saver.save(sess, "EN1_net/save_net.ckpt")   #save the model
+            save_path = saver.save(sess, "NM1_net/save_net.ckpt")   #save the model
         
     for n in range(27):
         test_xbatch = x_test[(n*128):(n*128+128),:,:]               #train 100 data every time, not including m*100+100
