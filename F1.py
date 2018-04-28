@@ -197,21 +197,17 @@ saver = tf.train.Saver()
 
 with tf.Session() as sess:
     sess.run(init)
-    for i in range(500):                                            #number of iterations:500*625=312500, 5 millon images
+    for i in range(5001):                                           #number of iterations:500*625=312500, 5 millon images
         for m in range(625):                                        #training process using training data 10000 images
             train_xbatch = x_data[(m*16):(m*16+16),:,:]             #train 16 data every batch, not including m*16+16
             train_ybatch = y_data[(m*16):(m*16+16),:]               #train 16 data every batch, not including m*16+16
             sess.run(Optimizer, feed_dict = {x:train_xbatch, y:train_ybatch, keep_prob:0.5})
-	    '''
-	    if m % 125 == 0:
+            if m % 125 == 0:
                 iteration = i * 625 + m
                 print('The iteration number is:',iteration)
-                print('The loss is:',sess.run(original_cost, feed_dict = {xs:train_xbatch, ys:train_ybatch, keep_prob:1}))
-	    '''
-	'''
-	if i % 50 == 0:
-	    save_path = saver.save(sess, "F1_net/save_net.ckpt")    #save the model
-	'''
+                print('The loss is:',sess.run(original_cost, feed_dict = {x:train_xbatch, y:train_ybatch, keep_prob:1}))
+        if i % 50 == 0:
+            save_path = saver.save(sess, "EN1_net/save_net.ckpt")   #save the model
 
     for k in range(27):
         test_xbatch = x_test[(k*128):(k*128+128),:,:]               #train 128 data every time, not including m*100+100
@@ -232,3 +228,11 @@ print('N_error_rate is:',N_accuracy)
 print('LM_error_rate is:',LM_accuracy)
 print('RM_error_rate is:',RM_accuracy)
 print(cache_F1)
+
+'''
+## save the predicted keypoints to excel
+cache_F1_df = pd.DataFrame(cache_F1)
+writer = pd.ExcelWriter('F1_test.xlsx')
+cache_F1_df.to_excel(writer,'sheet1')
+writer.save()
+'''
