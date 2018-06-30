@@ -14,9 +14,11 @@ If your gpu is NVIDIA product, you should also install `CUDA` and `cuDNN`, becau
 </br>
 You can reference [how to build a tensorflow-gpu environment 1](https://blog.csdn.net/lwplwf/article/details/54894364) and [how to build a tensorflow-gpu environment 2](https://blog.csdn.net/lwplwf/article/details/54896088). They are the detailed steps of installing tensorflow-gpu.
 </br>
-You should know that I take the experiment on my `Win10` computer with `NVIDIA GTX860m GPU`. So my programs are writen according to the configuration of my computer, and you could rename and change some of the variables, like URLs. And the versions of [CUDA](https://developer.nvidia.com/cuda-toolkit-archive) and [cuDNN](https://developer.nvidia.com/rdp/cudnn-download) should be related to your GPU, which is really important. Before you download the cuDNN, you should register a NVIDIA account. There are some reference: [how to install cuDNN](https://blog.csdn.net/xuyanan3/article/details/73866883), [some questions when installing CUDA & cuDNN](https://blog.csdn.net/mm644706215/article/details/78797782).
+You should know that I take the experiment on my `Win10` computer with `NVIDIA GTX860m GPU`. So my programs are writen according to the configuration of my computer, and you could rename and change some of the variables, like URLs. And the versions of [CUDA](https://developer.nvidia.com/cuda-toolkit-archive) and [cuDNN](https://developer.nvidia.com/rdp/cudnn-download) should be related to your GPU, which is really important. Before you download the cuDNN, you should register a NVIDIA account. In general, you should install CUDA first and install cuDNN later. There are some reference: [how to install cuDNN after installing CUDA](https://blog.csdn.net/xuyanan3/article/details/73866883), [some questions when installing CUDA & cuDNN](https://blog.csdn.net/mm644706215/article/details/78797782).
 </br>
-There are some questions when installing CUDA. The first is [fail to install CUDA](https://blog.csdn.net/jacke121/article/details/80368167). The second is [environment variables](https://blog.csdn.net/u011821462/article/details/50145221).
+There are some questions you might meet when installing CUDA. The first is [wrong driver version](https://blog.csdn.net/jacke121/article/details/80368167). The second is [cannot install Visual Studio(VS) Intergration](https://blog.csdn.net/zzpong/article/details/80282814). You can choose custom installation.
+</br>
+You should correctly config the CUDA environment refer to this website [environment variables configuration](https://blog.csdn.net/asd136912/article/details/79383161).
 </br>
 Besides, I strongly recommend that you prepare a computer with more than 8G RAM, because there are a lot of parameters.
 </br>
