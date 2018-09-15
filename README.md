@@ -4,7 +4,7 @@
 
 #### 1.1 Pre-Work of Environment
 
-First you could download the `raw dataset` provided by paper author [dataset web](https://mmlab.ie.cuhk.edu.hk/archive/CNN/) or[CSDN web](https://blog.csdn.net/fishmai/article/details/52766046?locationNum=3). I save those pictures to desktop, which is easy for me to cite. And the URLs in my programs are relavant to `desktop`.
+First you could download the `raw dataset` provided by paper author [dataset web](https://mmlab.ie.cuhk.edu.hk/archive/CNN/) or this [CSDN web](https://blog.csdn.net/fishmai/article/details/52766046?locationNum=3). I save those pictures to desktop, which is easy for me to cite. And the URLs in my programs are relavant to `desktop`.
 </br>
 #### 1.2 Install tensorflow-gpu
 
