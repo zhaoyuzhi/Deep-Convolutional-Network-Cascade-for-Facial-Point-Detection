@@ -38,6 +38,12 @@ The number of iterations may be big and you can adjust it (in Session's for loop
 
 There are some .py files that you can run for a test: `F1_CelebA.py` and `F1_run_CelebA.py`. The first one is that take 202599 CelebA dataset as training dataset and 13466 LFPW/webface dataset (author's dataset) as validation dataset. The second one is that using the network trained by F1_CelebA.py to test CASIA dataset.
 
+Maybe you will get the results like these:
+
+![front](https://github.com/zhaoyuzhi/Deep-Convolutional-Network-Cascade-for-Facial-Point-Detection/blob/master/Comparison%20of%20Different%20Networks%20by%20F1/front.jpg)
+
+![profile](https://github.com/zhaoyuzhi/Deep-Convolutional-Network-Cascade-for-Facial-Point-Detection/blob/master/Comparison%20of%20Different%20Networks%20by%20F1/profile.jpg)
+
 ## 3 Training Method
 
 #### 3.1 Something Important
